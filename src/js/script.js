@@ -94,6 +94,61 @@
       thisProduct.processOrder();
       console.log('new Product:', thisProduct);
     }    
+    
+    addToCart (){
+      const this Product = this;
+
+      app.cart.add(thisProduct);
+    }
+
+    prepareCartProduct() {
+      const thisProduct = this;
+
+      const productSummary = {
+
+        id: thisProduct.id,
+        name: thisProduct.data.name,
+        amount: thisProduct.amountWidget.value,
+        priceSingle: thisProduct.priceSingle,
+        price: thisProduct.amountWidget.value * thisProduct.priceSingle,
+        params: thisProduct.prepareCartProductParams(),
+      };
+
+      return productSummary;
+    }
+
+    prepareCartProductParams() {
+
+      const thisProduct = this;
+
+      // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      const params = {};
+      // for every category (param)...
+      for (let paramId in thisProduct.data.params) {
+        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
+        const param = thisProduct.data.params[paramId];
+
+        // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        };
+
+        // for every option in this category
+        for (let optionId in param.options) {
+          // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
+          const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          if (optionSelected) {
+            params[paramId].options[optionId] = option.label;
+          }
+        }
+      }
+      return params;
+    }
+
     renderInMenu(){
       const thisProduct = this;
 
@@ -313,7 +368,7 @@
 
   class Cart {
     constructor(element) {
-      const thisCart = this;
+      // const thisCart = this;
 
       thisCart.products = [];
 
@@ -322,6 +377,26 @@
       console.log('new Cart', thisCart);
 
       thisCart.initActions();
+    }
+
+    add(menuProduct) {
+      const thisCart = this;
+
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+      /* add element to menu */
+
+      thisCart.dom.productList.appendChild(generatedDOM);
+
+      console.log('adding product', menuProduct);
+
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      console.log('thisCart.products', thisCart.products);
+
+      thisCart.update();
+
     }
 
     getElements(element) {
