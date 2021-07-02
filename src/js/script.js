@@ -7,7 +7,6 @@ import AmountWidget from './components/AmountWidget.js';*/
 
 {
   'use strict';
-const app = {
 
   const select = {
     templateOf: {
@@ -59,7 +58,7 @@ const app = {
     },
     // CODE ADDED END
   };
-  initMenu: function () {
+  
 
   const classNames = {
     menuProduct: {
@@ -84,7 +83,7 @@ const app = {
     cart: {
       defaultDeliveryFee: 20,
     },
-    console.log('thisApp.data: ', thisApp.data);
+
 
     db: {
       url: '//localhost:3131',
@@ -580,11 +579,11 @@ const app = {
         new Product(productData, thisApp.data.products[productData]);
 
     }
-  },
+  }
 
     initAmountWidget() {
       const thisCartProduct = this;
-  initData: function () {
+  function initData() {
     const thisApp = this;
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
@@ -595,7 +594,7 @@ const app = {
       });
     }
 
-    remove() {
+    function remove() {
       const thisCartProduct = this;
 
       const event = new CustomEvent('remove', {
@@ -616,7 +615,7 @@ const app = {
       .then(function (parsedResponse) {
         console.log('parsedResponse', parsedResponse);
 
-    initActions() {
+    function initActions() {
       const thisCartProduct = this;
         /* save parsedRersponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
@@ -632,7 +631,7 @@ const app = {
       });
     }
 
-    getData() {
+    function getData() {
       const thisCartProduct = this;
 
       const payloadSummary = {
@@ -686,10 +685,10 @@ const app = {
     console.log('thisApp.data', JSON.stringify(thisApp.data));
 
     },
-  },
+  
+
 
     init: function () {
-  init: function () {
 
       const thisApp = this;
       console.log('*** App starting ***');
@@ -697,42 +696,37 @@ const app = {
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
-    const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
+      const thisApp = this;
+      console.log('*** App starting ***');
+      console.log('thisApp:', thisApp);
+      console.log('classNames:', classNames);
+      console.log('settings:', settings);
+      console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initCart();
     },
-    thisApp.initData();
-    thisApp.initCart();
-  },
+    
+  
 
-    initCart: function () {
-      const thisApp = this;
+    
   initCart: function () {
     const thisApp = this;
-
-      const cartElem = document.querySelector(select.containerOf.cart);
-      thisApp.cart = new Cart(cartElem);
-    },
     const cartElem = document.querySelector(select.containerOf.cart);
     thisApp.cart = new Cart(cartElem);
 
-  };
+  
     thisApp.productList = document.querySelector(select.containerOf.menu);
 
     thisApp.productList.addEventListener('add-to-cart', function(event) {
       app.cart.add(event.detail.product);
     });
   },
-
+}  
   app.initMenu();
 };
 
   app.init();
 }
 app.init();
+}
