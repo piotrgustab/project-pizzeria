@@ -1,9 +1,10 @@
-import {settings} from './settings.js';
+import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import AmountWidget from './components/AmountWidget.js';
 import CartProduct from './components/CartProduct.js';
-import {utils} from './utils.js'
+import Booking from './components/Booking.js';
+import utils from './utils.js'
 
 const select = {
   templateOf: {
@@ -185,6 +186,14 @@ class Product {
 
     });
 
+  }
+
+  initBooking: function () {
+    const thisApp = this;
+
+    const bookingElement = document.querySelector(select.containerOf.booking);
+
+    thisApp.booking = new Booking(bookingElement);
   }
 
   initOrderForm() {
@@ -621,6 +630,14 @@ class CartProduct {
 }
 
 const app = {
+  initPages: function () {
+    const thisApp = this;
+
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+
+    thisApp.activatePage(thisApp.pages[0].id);
+
+  }
   initMenu: function () {
 
     const thisApp = this;
@@ -665,6 +682,8 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initMenu();
+    thisApp.initPages();
+    thisApp.initBooking();
   },
   
   initCart: function () {
