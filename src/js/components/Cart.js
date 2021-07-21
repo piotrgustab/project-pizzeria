@@ -1,3 +1,7 @@
+import { select, classNames, settings, templates } from '../settings.js';
+import { utils } from '../utils.js';
+import CartProduct from './CartProduct.js';
+
 class Cart {
   constructor(element) {
     const thisCart = this;
@@ -142,4 +146,4 @@ class Cart {
   
 }
 
-export default 'Cart';
+export default Cart;
