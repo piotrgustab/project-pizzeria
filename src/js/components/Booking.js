@@ -34,8 +34,8 @@ class Booking {
 
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking
-      + '?' + params.booking.join('&'), 
-        + '?' + params.booking.join('&'), 
+      + '?' + params.booking.join('&') 
+        + '?' + params.booking.join('&') 
       eventsCurrent: settings.db.url + '/' + settings.db.event
         + '?' + params.eventsCurrent.join('&'),  
       eventsRepeat: settings.db.url + '/' + settings.db.event
@@ -238,3 +238,4 @@ class Booking {
 
   }
 }
+
